@@ -1,0 +1,13 @@
+function SSS = sparse_silhouette(X, labels, weights)
+%Calculate the sparse silhouette coefficient of sparse clustering
+
+%Calculate sample size
+K = size(weights, 1);
+SSS = zeros(size(X, 1), 1);
+
+for k = 1 : K
+    SS = silhouette(X(:, logical(weights(k, :))), labels);
+    SSS(labels == k, :) = SS(labels == k, :);
+end
+
+end
